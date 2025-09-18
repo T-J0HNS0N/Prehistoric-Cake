@@ -24,11 +24,13 @@
     display: none;
   }
   #dino {
-    margin-top: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
     text-align: center;
     color: #0f0;
     font-family: monospace;
-    font-size: 1rem;
+    font-size: 1.5rem;
+    line-height: 1.1;
   }
   .speech-bubble {
     position: relative;
@@ -48,6 +50,32 @@
     border: 10px solid transparent;
     border-bottom-color: #0f0;
   }
+
+  /* Cake line styles */
+  #cake {
+    font-family: monospace;
+    margin-top: 1rem;
+    color: #0f0;
+    white-space: pre;
+  }
+  .cake-line {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+  }
+  .cake-line.visible {
+    opacity: 1;
+  }
+
+  /* Candle flicker animation */
+  .candle {
+    color: #ff0;
+    animation: flicker 1s infinite;
+  }
+  @keyframes flicker {
+    0%, 100% { color: #ff0; }
+    50% { color: #ffa500; }
+  }
+
   .cursor {
     display: inline-block;
     width: 10px;
@@ -64,18 +92,28 @@
 <body>
 <div id="terminal"></div>
 <div id="dino" class="hidden">
-<pre>
-   __
-  / _)
- .-^^^-/ /
-(___(__/
-</pre>
-<div class="speech-bubble">Happy Birthday, Ortiz!</div>
+  <pre>
+           __
+          / _)
+   .-^^^-/ /
+__/       /
+<__.|_|-|_|
+  </pre>
+  <div class="speech-bubble">Happy Birthday, Ortiz!</div>
+  <pre id="cake">
+    <span class="cake-line candle">   i  i  i   </span>
+    <span class="cake-line">  |:  :  :|  </span>
+    <span class="cake-line">  |:  :  :|  </span>
+    <span class="cake-line">  |:  :  :|  </span>
+    <span class="cake-line">  |:  :  :|  </span>
+    <span class="cake-line">  '-------'  </span>
+  </pre>
 </div>
 
 <script>
 const terminal = document.getElementById('terminal');
 const dino = document.getElementById('dino');
+const cakeLines = document.querySelectorAll('#cake .cake-line');
 
 const lines = [
   "Initializing system...",
@@ -111,13 +149,22 @@ function typeLine() {
     }
     typeChar();
   } else {
-    showDino();
+    showDinoAndCake();
   }
 }
 
-function showDino() {
+function showDinoAndCake() {
   terminal.textContent += '\n';
   dino.classList.remove('hidden');
+  animateCake();
+}
+
+function animateCake() {
+  cakeLines.forEach((line, idx) => {
+    setTimeout(() => {
+      line.classList.add('visible');
+    }, idx * 600);
+  });
 }
 
 typeLine();
