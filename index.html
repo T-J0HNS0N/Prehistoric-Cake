@@ -1,97 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Prehistoric Cake</title>
-<style>
-  body {
-    background: #000;
-    color: #0f0;
-    font-family: 'Courier New', Courier, monospace;
-    padding: 2rem;
-    overflow: hidden;
-  }
-  #terminal {
-    white-space: pre;
-    font-size: 1.2rem;
-    line-height: 1.4;
-    max-width: 600px;
-    margin: 0 auto;
-    min-height: 300px;
-  }
-  .hidden {
-    display: none;
-  }
-  #dino {
-    margin-top: 3rem;
-    margin-bottom: 2rem;
-    text-align: center;
-    color: #0f0;
-    font-family: monospace;
-    font-size: 1.5rem;
-    line-height: 1.1;
-  }
-  .speech-bubble {
-    position: relative;
-    background: #0f0;
-    color: #000;
-    border-radius: 10px;
-    padding: 0.5rem 1rem;
-    display: inline-block;
-    margin-top: 1rem;
-    font-weight: bold;
-  }
-  .speech-bubble::after {
-    content: '';
-    position: absolute;
-    bottom: 100%;
-    left: 20%;
-    border: 10px solid transparent;
-    border-bottom-color: #0f0;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prehistoric Cake - Unlock the Date</title>
+  <style>
+    body {
+      background: #000;
+      color: #0f0;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 2rem;
+      text-align: center;
+    }
 
-  /* Cake styling */
-  #cake {
-    font-family: monospace;
-    margin-top: 1rem;
-    color: #0f0;
-    white-space: pre;
-  }
-  .cake-line {
-    opacity: 0;
-    transition: opacity 0.5s ease-in;
-  }
-  .cake-line.visible {
-    opacity: 1;
-  }
+    h1 {
+      font-size: 1.5rem;
+    }
 
-  /* Candle flicker animation */
-  .candle {
-    color: #ff0;
-    animation: flicker 1s infinite;
-  }
-  @keyframes flicker {
-    0%, 100% { color: #ff0; }
-    50% { color: #ffa500; }
-  }
+    input[type="text"] {
+      background: #111;
+      border: 1px solid #0f0;
+      color: #0f0;
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 0.5rem;
+      width: 200px;
+      text-align: center;
+      margin-top: 1rem;
+    }
 
-  .cursor {
-    display: inline-block;
-    width: 10px;
-    background: #0f0;
-    animation: blink 1s infinite;
-    margin-left: 2px;
-  }
-  @keyframes blink {
-    0%, 50% {opacity: 1;}
-    51%, 100% {opacity: 0;}
-  }
-</style>
+    button {
+      background: #111;
+      color: #0f0;
+      border: 1px solid #0f0;
+      padding: 0.5rem 1rem;
+      margin-top: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0f0;
+      color: #000;
+    }
+
+    #message {
+      margin-top: 1.5rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    #terminal, #dino {
+      white-space: pre;
+      font-size: 1.2rem;
+      line-height: 1.4;
+      max-width: 600px;
+      margin: 2rem auto;
+      display: none;
+    }
+
+    .speech-bubble {
+      position: relative;
+      background: #0f0;
+      color: #000;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      display: inline-block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 20%;
+      border: 10px solid transparent;
+      border-bottom-color: #0f0;
+    }
+
+    .cake-line {
+      opacity: 0;
+      transition: opacity 0.5s ease-in;
+    }
+
+    .cake-line.visible {
+      opacity: 1;
+    }
+
+    .candle {
+      color: #ff0;
+      animation: flicker 1s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { color: #ff0; }
+      50% { color: #ffa500; }
+    }
+  </style>
 </head>
 <body>
+
+<h1>🔐 Enter the Date to Unlock the Surprise</h1>
+<p>Please enter the date (xx/xx/xxxx):</p>
+
+<input type="text" id="dateInput" placeholder="mm/dd/yyyy" />
+<br />
+<button onclick="verifyDate()">Submit</button>
+
+<div id="message"></div>
+
 <div id="terminal"></div>
-<div id="dino" class="hidden">
+
+<div id="dino">
   <pre>
            __
           / _)
@@ -100,76 +120,117 @@ __/       /
 <__.|_|-|_|
   </pre>
   <div class="speech-bubble">Happy Birthday, Ortiz!</div>
+
   <pre id="cake">
-    <span class="cake-line candle">       i  i  i</span>
-    <span class="cake-line">      |:  :  :|</span>
-    <span class="cake-line">     __|_____|__</span>
-    <span class="cake-line">    |^^^^^^^^^^^|</span>
-    <span class="cake-line">    |:H:a:p:p:y:|</span>
-    <span class="cake-line">    |:B:i:r:t:h:|</span>
-    <span class="cake-line">    |:d:a:y:!:!:|</span>
-    <span class="cake-line">    '~~~~~~~~~~~'</span>
+<span class="cake-line">
+  <span class="candle">   i</span><span class="candle">  i</span><span class="candle">  i   </span>
+</span>
+<span class="cake-line">  |:  :  :|  </span>
+<span class="cake-line">  |:  :  :|  </span>
+<span class="cake-line">  |:  :  :|  </span>
+<span class="cake-line">  |:  :  :|  </span>
+<span class="cake-line">  '-------'  </span>
   </pre>
 </div>
 
+<!-- Confetti library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 <script>
-const terminal = document.getElementById('terminal');
-const dino = document.getElementById('dino');
-const cakeLines = document.querySelectorAll('#cake .cake-line');
+  const expectedDate = "09/18/2025";
+  const terminal = document.getElementById('terminal');
+  const dino = document.getElementById('dino');
+  const cakeLines = document.querySelectorAll('#cake .cake-line');
+  const message = document.getElementById('message');
 
-const lines = [
-  "Initializing system...",
-  "Loading security protocols...",
-  "Verifying user credentials...",
-  "🔒 Lock status: CLOSED",
-  "",
-  "Attempting override...",
-  "",
-  "Unlocking...",
-  "🔓 Lock status: OPEN",
-  "",
-  "ACCESS GRANTED: Birthday wishes!",
-  "",
-];
-
-let index = 0;
-
-function typeLine() {
-  if (index < lines.length) {
-    let line = lines[index];
-    let i = 0;
-    function typeChar() {
-      if (i < line.length) {
-        terminal.textContent += line[i];
-        i++;
-        setTimeout(typeChar, 40);
-      } else {
-        terminal.textContent += '\n';
-        index++;
-        setTimeout(typeLine, 500);
-      }
+  function verifyDate() {
+    const userDate = document.getElementById('dateInput').value.trim();
+    if (userDate === expectedDate) {
+      message.textContent = "✅ ACCESS GRANTED: Welcome!";
+      document.getElementById('dateInput').style.display = "none";
+      event.target.style.display = "none"; // hide button
+      startSequence();
+    } else {
+      message.textContent = "❌ ACCESS DENIED: Invalid date.";
     }
-    typeChar();
-  } else {
-    showDinoAndCake();
   }
-}
 
-function showDinoAndCake() {
-  terminal.textContent += '\n';
-  dino.classList.remove('hidden');
-  animateCake();
-}
+  const lines = [
+    "Initializing system...",
+    "Loading security protocols...",
+    "Verifying user input...",
+    "🔒 Lock status: CLOSED",
+    "",
+    "Attempting override...",
+    "",
+    "Unlocking...",
+    "🔓 Lock status: OPEN",
+    "",
+    "ACCESS GRANTED: Birthday wishes!",
+    "",
+  ];
 
-function animateCake() {
-  cakeLines.forEach((line, idx) => {
+  let index = 0;
+
+  function startSequence() {
+    terminal.style.display = "block";
+    typeLine();
+  }
+
+  function typeLine() {
+    if (index < lines.length) {
+      let line = lines[index];
+      let i = 0;
+      function typeChar() {
+        if (i < line.length) {
+          terminal.textContent += line[i];
+          i++;
+          setTimeout(typeChar, 40);
+        } else {
+          terminal.textContent += '\n';
+          index++;
+          setTimeout(typeLine, 500);
+        }
+      }
+      typeChar();
+    } else {
+      showDino();
+    }
+  }
+
+  function showDino() {
+    terminal.textContent += '\n';
+    dino.style.display = "block";
+    animateCake();
+  }
+
+  function animateCake() {
+    cakeLines.forEach((line, idx) => {
+      setTimeout(() => {
+        line.classList.add('visible');
+        if (idx === cakeLines.length - 1) {
+          setTimeout(() => {
+            launchConfetti();
+          }, 500);
+        }
+      }, idx * 600);
+    });
+  }
+
+  function launchConfetti() {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
     setTimeout(() => {
-      line.classList.add('visible');
-    }, idx * 600);
-  });
-}
-
-typeLine();
+      confetti({
+        particleCount: 150,
+        spread: 100,
+        origin: { y: 0.4 }
+      });
+    }, 700);
+  }
 </script>
 </body>
 </html>
