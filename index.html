@@ -146,7 +146,7 @@ __/       /
   function verifyDate() {
     const userDate = document.getElementById('dateInput').value.trim();
     if (userDate === expectedDate) {
-      message.textContent = "✅ ACCESS GRANTED: Welcome!";
+      message.textContent = "✅ PASSWORD ACCEPTED: Welcome!";
       document.getElementById('dateInput').style.display = "none";
       event.target.style.display = "none"; // hide button
       startSequence();
@@ -161,9 +161,10 @@ __/       /
     "Verifying user input...",
     "🔒 Lock status: CLOSED",
     "",
+    "...loading....",
     "Attempting override...",
     "",
-    "Unlocking...",
+    "Unlocking....",
     "🔓 Lock status: OPEN",
     "",
     "ACCESS GRANTED: Birthday wishes!",
