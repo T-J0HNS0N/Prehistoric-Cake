@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prehistoric Cake</title>
+<style>
+  body {
+    background: #000;
+    color: #0f0;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 2rem;
+    overflow: hidden;
+  }
+  #terminal {
+    white-space: pre;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    max-width: 600px;
+    margin: 0 auto;
+    min-height: 300px;
+  }
+  .hidden {
+    display: none;
+  }
+  #dino {
+    margin-top: 2rem;
+    text-align: center;
+    color: #0f0;
+    font-family: monospace;
+    font-size: 1rem;
+  }
+  .speech-bubble {
+    position: relative;
+    background: #0f0;
+    color: #000;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: bold;
+  }
+  .speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 20%;
+    border: 10px solid transparent;
+    border-bottom-color: #0f0;
+  }
+  .cursor {
+    display: inline-block;
+    width: 10px;
+    background: #0f0;
+    animation: blink 1s infinite;
+    margin-left: 2px;
+  }
+  @keyframes blink {
+    0%, 50% {opacity: 1;}
+    51%, 100% {opacity: 0;}
+  }
+</style>
+</head>
+<body>
+<div id="terminal"></div>
+<div id="dino" class="hidden">
+<pre>
+   __
+  / _)
+ .-^^^-/ /
+(___(__/
+</pre>
+<div class="speech-bubble">Happy Birthday, Stepdad!</div>
+</div>
+
+<script>
+const terminal = document.getElementById('terminal');
+const dino = document.getElementById('dino');
+
+const lines = [
+  "Initializing system...",
+  "Loading security protocols...",
+  "Verifying user credentials...",
+  "🔒 Lock status: CLOSED",
+  "",
+  "Attempting override...",
+  "",
+  "Unlocking...",
+  "🔓 Lock status: OPEN",
+  "",
+  "ACCESS GRANTED: Birthday wishes!",
+  "",
+];
+
+let index = 0;
+
+function typeLine() {
+  if (index < lines.length) {
+    let line = lines[index];
+    let i = 0;
+    function typeChar() {
+      if (i < line.length) {
+        terminal.textContent += line[i];
+        i++;
+        setTimeout(typeChar, 40);
+      } else {
+        terminal.textContent += '\n';
+        index++;
+        setTimeout(typeLine, 500);
+      }
+    }
+    typeChar();
+  } else {
+    showDino();
+  }
+}
+
+function showDino() {
+  terminal.textContent += '\n';
+  dino.classList.remove('hidden');
+}
+
+typeLine();
+</script>
+</body>
+</html>
