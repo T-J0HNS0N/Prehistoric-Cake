@@ -105,7 +105,7 @@
 
 <input type="text" id="dateInput" placeholder="mm/dd/yyyy" />
 <br />
-<button onclick="verifyDate()">Submit</button>
+<button id="submitBtn" onclick="verifyDate()">Submit</button>
 
 <div id="message"></div>
 
@@ -148,7 +148,7 @@ __/       /
     if (userDate === expectedDate) {
       message.textContent = "✅ PASSWORD ACCEPTED: Welcome!";
       document.getElementById('dateInput').style.display = "none";
-      event.target.style.display = "none"; // hide button
+      document.getElementById('submitBtn').style.display = "none";
       startSequence();
     } else {
       message.textContent = "❌ ACCESS DENIED: Invalid date.";
